@@ -27,7 +27,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* If you want to use a custom box-shadow, define it as a CSS variable or directly in a class */
 :root {
   --box-shadow-glow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
