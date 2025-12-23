@@ -4,6 +4,7 @@ import React from "react";
 import { Menu, X, Sun, Moon, Brain } from "lucide-react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
+import Image from "next/image";
 
 interface NavbarProps {
   darkMode: boolean;
@@ -76,8 +77,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             href='#about'
             onClick={(e) => smoothScroll(e, "#about")}
             className='flex items-center space-x-3 cursor-pointer'>
-            <div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-400 rounded-lg flex items-center justify-center shadow-lg'>
-              <Brain className='w-7 h-7 text-white' />
+            <div className='w-12 h-12  from-blue-600 to-blue-400 rounded-lg flex items-center justify-center shadow-lg'>
+              <Image
+                alt='hero'
+                src={"https://server.airi.uz/public_media/img/logo.png"}
+                width={50}
+                height={50}
+              />
             </div>
             <div>
               <h1

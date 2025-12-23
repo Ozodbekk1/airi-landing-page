@@ -30,3 +30,181 @@ body {
 :root {
   --box-shadow-glow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+  opacity: 0; /* Ensures it stays hidden until animation starts */
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+@keyframes reveal-text {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-reveal {
+  animation: reveal-text 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+.delay-100 {
+  animation-delay: 150ms;
+}
+.delay-200 {
+  animation-delay: 300ms;
+}
+.delay-300 {
+  animation-delay: 450ms;
+}
+.delay-400 {
+  animation-delay: 600ms;
+}
+
+/* Animation for the card entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for the spinning border gradient */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-reveal {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* Container for the animated border */
+.animated-border {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* The gradient "snake" that rotates behind the card */
+.animated-border::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    #3b82f6,
+    rgba(59, 130, 246, 0.1),
+    transparent 80%
+  );
+  animation: spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.animated-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes border-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes content-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-complex-reveal {
+  animation: content-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+/* The Animated Border Container */
+.research-card-border {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  padding: 1.5px; /* Border thickness */
+}
+
+.research-card-border::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, #3b82f6, transparent 30%);
+  animation: border-spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.research-card-border:hover::before {
+  opacity: 1;
+}
+
+.research-card-border::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 1.5px;
+  border-radius: 23px; /* Slightly less than parent 3xl */
+  background: inherit;
+}

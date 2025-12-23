@@ -14,6 +14,7 @@ import {
   Target,
   LucideIcon,
 } from "lucide-react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 interface ProjectsProps {
   darkMode: boolean;
@@ -24,7 +25,7 @@ interface ProjectsProps {
 interface Project {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: string | LucideIcon;
   category: string;
   status: string;
   fullDescription: string;
@@ -50,7 +51,7 @@ export const Projects: React.FC<ProjectsProps> = ({
       title: "Vehicle Recognition System",
       description:
         "AI-powered security software for violation detection and vehicle number recognition across national infrastructure",
-      icon: Shield,
+      icon: "https://lottie.host/1885fc05-3cc6-43fc-b935-b5ce7fe5a596/WgfsdzoBRI.lottie",
       category: "Computer Vision",
       status: "Deployed",
       fullDescription:
@@ -75,7 +76,7 @@ export const Projects: React.FC<ProjectsProps> = ({
       title: "Environmental Monitoring",
       description:
         "Analytics software for monitoring and forecasting ecological situation in Aral Sea region with real-time data",
-      icon: Globe,
+      icon: "https://lottie.host/24cc6d2b-de7a-4c7c-b90d-5a77584599c0/RtbBHmvgMo.lottie",
       category: "Data Analytics",
       status: "Active",
       fullDescription:
@@ -100,7 +101,7 @@ export const Projects: React.FC<ProjectsProps> = ({
       title: "Medical AI Assistant",
       description:
         "Cardiology applications using advanced AI for diagnostic support, patient care, and healthcare optimization",
-      icon: Award,
+      icon: "https://lottie.host/41612b20-6561-42f7-8fd6-b0c17190a923/Wqr2SO6vtu.lottie",
       category: "Healthcare",
       status: "In Development",
       fullDescription:
@@ -125,7 +126,7 @@ export const Projects: React.FC<ProjectsProps> = ({
       title: "National Herbarium Recognition",
       description:
         "Digital recognition system for botanical research, biodiversity preservation, and environmental studies",
-      icon: Lightbulb,
+      icon: "https://lottie.host/1aa4c5e0-aa91-45dd-a43a-d3f79da0bbb4/k2Zu5aQPpP.lottie",
       category: "Biology",
       status: "Research Phase",
       fullDescription:
@@ -188,7 +189,16 @@ export const Projects: React.FC<ProjectsProps> = ({
                               ? "bg-gradient-to-br from-blue-500/10 to-purple-500/10"
                               : "bg-gradient-to-br from-blue-50 to-purple-50"
                           } p-12`}>
-                          <Icon className='w-32 h-32 text-blue-500' />
+                          {typeof Icon === "string" ? (
+                            <DotLottieReact
+                              src={Icon}
+                              loop
+                              autoplay
+                              className='w-56 h-56'
+                            />
+                          ) : (
+                            <Icon className='w-32 h-32 text-blue-500' />
+                          )}
                         </div>
                         <div className='md:w-1/2 p-12 flex flex-col justify-center'>
                           <div className='flex items-center gap-3 mb-4 flex-wrap'>
@@ -264,9 +274,18 @@ export const Projects: React.FC<ProjectsProps> = ({
                 <X size={24} />
               </button>
               <div className='flex items-center gap-4 mb-4'>
-                {React.createElement(selectedProject.icon, {
-                  className: "w-12 h-12",
-                })}
+                {typeof selectedProject.icon === "string" ? (
+                  <DotLottieReact
+                    src={selectedProject.icon}
+                    loop
+                    autoplay
+                    className='w-12 h-12'
+                  />
+                ) : (
+                  React.createElement(selectedProject.icon, {
+                    className: "w-12 h-12",
+                  })
+                )}
                 <div>
                   <h2 className='text-3xl mb-2'>{selectedProject.title}</h2>
                   <div className='flex gap-2 flex-wrap'>

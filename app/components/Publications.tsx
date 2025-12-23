@@ -9,8 +9,8 @@ import {
   ExternalLink,
   Filter,
   X,
+  ChevronDown,
 } from "lucide-react";
-import { useLanguage } from "../contexts/LanguageContext";
 
 interface PublicationsProps {
   darkMode: boolean;
@@ -29,7 +29,7 @@ interface Publication {
 }
 
 export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
-  const { language, t } = useLanguage();
+  const language = "en";
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [selectedYear, setSelectedYear] = useState<string>("all");
   const [selectedPublication, setSelectedPublication] =
@@ -186,94 +186,152 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
         className='relative z-10 py-20 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
-            <h2 className='text-4xl md:text-5xl mb-4'>
-              <span className='bg-linear-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent'>
-                {t("publications.title")}
+            <h2 className='text-4xl md:text-5xl font-bold mb-4'>
+              <span className='bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent'>
+                Research Publications
               </span>
             </h2>
             <p className={`${textSecondaryClass} text-lg max-w-2xl mx-auto`}>
-              {t("publications.subtitle")}
+              Cutting-edge research advancing AI technology and its applications
             </p>
           </div>
 
-          {/* Filters */}
-          <div className='flex flex-col sm:flex-row gap-4 mb-12'>
-            <div className='flex-1'>
+          {/* Enhanced Filters */}
+          <div className='grid sm:grid-cols-2 gap-4 mb-12'>
+            {/* Category Filter */}
+            <div className='relative group'>
               <div className='flex items-center gap-2 mb-2'>
                 <Filter size={18} className='text-blue-500' />
-                <label className={`text-sm ${textSecondaryClass}`}>
+                <label className={`text-sm font-medium ${textSecondaryClass}`}>
                   Category
                 </label>
               </div>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className={`w-full px-4 py-3 rounded-xl border ${
-                  darkMode
-                    ? "bg-slate-900 border-slate-700 text-white"
-                    : "bg-white border-gray-300 text-gray-900"
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}>
-                <option value='all'>{t("publications.filterAll")}</option>
-                {categories
-                  .filter((c) => c !== "all")
-                  .map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-              </select>
+              <div className='relative'>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className={`w-full px-4 py-3.5 rounded-xl border-2 ${
+                    darkMode
+                      ? "bg-slate-900/70 border-slate-700 text-white hover:border-blue-500/50"
+                      : "bg-white border-gray-200 text-gray-900 hover:border-blue-400/50"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 appearance-none cursor-pointer backdrop-blur-sm`}>
+                  <option value='all'>All Categories</option>
+                  {categories
+                    .filter((c) => c !== "all")
+                    .map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                </select>
+                <ChevronDown
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${
+                    darkMode ? "text-slate-400" : "text-gray-500"
+                  }`}
+                  size={20}
+                />
+                <div
+                  className={`absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-focus-within:opacity-20 transition-opacity duration-300 pointer-events-none`}></div>
+              </div>
             </div>
 
-            <div className='flex-1'>
+            {/* Year Filter */}
+            <div className='relative group'>
               <div className='flex items-center gap-2 mb-2'>
                 <Calendar size={18} className='text-blue-500' />
-                <label className={`text-sm ${textSecondaryClass}`}>Year</label>
+                <label className={`text-sm font-medium ${textSecondaryClass}`}>
+                  Publication Year
+                </label>
               </div>
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className={`w-full px-4 py-3 rounded-xl border ${
-                  darkMode
-                    ? "bg-slate-900 border-slate-700 text-white"
-                    : "bg-white border-gray-300 text-gray-900"
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}>
-                <option value='all'>{t("publications.filterYear")}</option>
-                {years
-                  .filter((y) => y !== "all")
-                  .map((year) => (
-                    <option key={year} value={year.toString()}>
-                      {year}
-                    </option>
-                  ))}
-              </select>
+              <div className='relative'>
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                  className={`w-full px-4 py-3.5 rounded-xl border-2 ${
+                    darkMode
+                      ? "bg-slate-900/70 border-slate-700 text-white hover:border-blue-500/50"
+                      : "bg-white border-gray-200 text-gray-900 hover:border-blue-400/50"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 appearance-none cursor-pointer backdrop-blur-sm`}>
+                  <option value='all'>All Years</option>
+                  {years
+                    .filter((y) => y !== "all")
+                    .map((year) => (
+                      <option key={year} value={year.toString()}>
+                        {year}
+                      </option>
+                    ))}
+                </select>
+                <ChevronDown
+                  className={`absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${
+                    darkMode ? "text-slate-400" : "text-gray-500"
+                  }`}
+                  size={20}
+                />
+                <div
+                  className={`absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-focus-within:opacity-20 transition-opacity duration-300 pointer-events-none`}></div>
+              </div>
             </div>
           </div>
+
+          {/* Active Filters Display */}
+          {(selectedCategory !== "all" || selectedYear !== "all") && (
+            <div className='flex flex-wrap items-center gap-3 mb-8'>
+              <span className={`text-sm ${textSecondaryClass}`}>
+                Active filters:
+              </span>
+              {selectedCategory !== "all" && (
+                <button
+                  onClick={() => setSelectedCategory("all")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ${
+                    darkMode
+                      ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
+                      : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  } transition-colors`}>
+                  {selectedCategory}
+                  <X size={14} />
+                </button>
+              )}
+              {selectedYear !== "all" && (
+                <button
+                  onClick={() => setSelectedYear("all")}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ${
+                    darkMode
+                      ? "bg-purple-500/20 text-purple-300 hover:bg-purple-500/30"
+                      : "bg-purple-100 text-purple-700 hover:bg-purple-200"
+                  } transition-colors`}>
+                  {selectedYear}
+                  <X size={14} />
+                </button>
+              )}
+            </div>
+          )}
 
           {/* Publications Grid */}
           <div className='grid md:grid-cols-2 gap-6'>
             {filteredPublications.map((pub) => (
               <div
                 key={pub.id}
-                className={`${cardBgClass} backdrop-blur-sm border rounded-2xl p-6 ${hoverBorderClass} transition-all duration-300`}>
+                className={`${cardBgClass} backdrop-blur-sm border rounded-2xl p-6 ${hoverBorderClass} hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}>
                 <div className='flex items-start gap-3 mb-4'>
                   <BookOpen className='w-6 h-6 text-blue-500 flex-shrink-0 mt-1' />
                   <div className='flex-1'>
                     <h3
-                      className={`text-xl ${
+                      className={`text-xl font-semibold ${
                         darkMode ? "text-white" : "text-gray-900"
-                      } mb-2`}>
+                      } mb-2 line-clamp-2`}>
                       {pub.title[language]}
                     </h3>
                     <div className='flex flex-wrap items-center gap-3 mb-3'>
                       <span
-                        className={`text-sm px-3 py-1 rounded-full ${
+                        className={`text-sm px-3 py-1 rounded-full font-medium ${
                           darkMode
                             ? "bg-blue-500/20 text-blue-300"
                             : "bg-blue-100 text-blue-700"
                         }`}>
                         {pub.category}
                       </span>
-                      <span className={`text-sm ${textSecondaryClass}`}>
+                      <span
+                        className={`text-sm font-medium ${textSecondaryClass}`}>
                         {pub.year}
                       </span>
                     </div>
@@ -281,25 +339,25 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
                 </div>
 
                 <p
-                  className={`${textSecondaryClass} text-sm mb-4 line-clamp-3`}>
+                  className={`${textSecondaryClass} text-sm mb-4 line-clamp-3 leading-relaxed`}>
                   {pub.abstract[language]}
                 </p>
 
                 <div className='flex items-center gap-2 mb-4'>
                   <Users size={16} className='text-blue-500' />
-                  <p className={`text-sm ${textSecondaryClass}`}>
+                  <p className={`text-sm ${textSecondaryClass} line-clamp-1`}>
                     {pub.authors.join(", ")}
                   </p>
                 </div>
 
-                <div className='flex items-center justify-between'>
-                  <span className={`text-sm ${textSecondaryClass}`}>
+                <div className='flex items-center justify-between pt-4 border-t border-gray-200 dark:border-slate-700'>
+                  <span className={`text-sm font-medium ${textSecondaryClass}`}>
                     {pub.citations} citations
                   </span>
                   <button
                     onClick={() => setSelectedPublication(pub)}
-                    className='px-4 py-2 bg-linear-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2 text-sm'>
-                    {t("publications.readMore")}
+                    className='px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2 text-sm font-medium'>
+                    Read More
                     <ExternalLink size={16} />
                   </button>
                 </div>
@@ -308,9 +366,18 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
           </div>
 
           {filteredPublications.length === 0 && (
-            <div className='text-center py-12'>
-              <p className={`${textSecondaryClass} text-lg`}>
-                No publications found for the selected filters.
+            <div className='text-center py-16'>
+              <div
+                className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${
+                  darkMode ? "bg-slate-800" : "bg-gray-100"
+                } mb-4`}>
+                <BookOpen className='w-10 h-10 text-blue-500' />
+              </div>
+              <p className={`${textSecondaryClass} text-lg mb-2`}>
+                No publications found
+              </p>
+              <p className={`${textSecondaryClass} text-sm`}>
+                Try adjusting your filters to see more results
               </p>
             </div>
           )}
@@ -321,25 +388,25 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
       {selectedPublication && (
         <div className='fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm'>
           <div
-            className={`relative ${cardBgClass} border rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto`}>
-            <div className='sticky top-0 bg-gradient-to-b from-blue-600 to-blue-500 text-white p-6 rounded-t-3xl'>
+            className={`relative ${cardBgClass} border rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl`}>
+            <div className='sticky top-0 bg-gradient-to-b from-blue-600 to-blue-500 text-white p-6 rounded-t-3xl z-10'>
               <button
                 onClick={() => setSelectedPublication(null)}
                 className='absolute top-4 right-4 p-2 hover:bg-white/20 rounded-lg transition-colors'>
                 <X size={24} />
               </button>
               <BookOpen className='w-12 h-12 mb-4' />
-              <h2 className='text-3xl mb-4 pr-12'>
+              <h2 className='text-3xl font-bold mb-4 pr-12'>
                 {selectedPublication.title[language]}
               </h2>
               <div className='flex flex-wrap gap-3'>
-                <span className='px-3 py-1 bg-white/20 rounded-full text-sm'>
+                <span className='px-3 py-1 bg-white/20 rounded-full text-sm font-medium'>
                   {selectedPublication.category}
                 </span>
-                <span className='px-3 py-1 bg-white/20 rounded-full text-sm'>
+                <span className='px-3 py-1 bg-white/20 rounded-full text-sm font-medium'>
                   {selectedPublication.year}
                 </span>
-                <span className='px-3 py-1 bg-white/20 rounded-full text-sm'>
+                <span className='px-3 py-1 bg-white/20 rounded-full text-sm font-medium'>
                   {selectedPublication.citations} citations
                 </span>
               </div>
@@ -348,11 +415,11 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
             <div className='p-8'>
               <div className='mb-6'>
                 <h3
-                  className={`text-lg ${
+                  className={`text-lg font-semibold ${
                     darkMode ? "text-white" : "text-gray-900"
                   } mb-2 flex items-center gap-2`}>
                   <Users size={20} className='text-blue-500' />
-                  {t("publications.authors")}
+                  Authors
                 </h3>
                 <p className={textSecondaryClass}>
                   {selectedPublication.authors.join(", ")}
@@ -361,10 +428,10 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
 
               <div className='mb-6'>
                 <h3
-                  className={`text-lg ${
+                  className={`text-lg font-semibold ${
                     darkMode ? "text-white" : "text-gray-900"
                   } mb-2`}>
-                  {t("publications.published")} in
+                  Published in
                 </h3>
                 <p className={`${textSecondaryClass} italic`}>
                   {selectedPublication.journal}, {selectedPublication.year}
@@ -373,7 +440,7 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
 
               <div className='mb-8'>
                 <h3
-                  className={`text-lg ${
+                  className={`text-lg font-semibold ${
                     darkMode ? "text-white" : "text-gray-900"
                   } mb-3`}>
                   Abstract
@@ -386,8 +453,8 @@ export const Publications: React.FC<PublicationsProps> = ({ darkMode }) => {
               <div className='pt-6 border-t border-gray-200 dark:border-slate-700'>
                 <button
                   onClick={() => setSelectedPublication(null)}
-                  className='w-full px-6 py-3 bg-linear-to-r from-blue-600 to-blue-500 text-white rounded-xl hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300'>
-                  {t("research.close")}
+                  className='w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 font-medium'>
+                  Close
                 </button>
               </div>
             </div>
