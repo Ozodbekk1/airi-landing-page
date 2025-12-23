@@ -1,6 +1,6 @@
 /** @format */
 "use client";
-
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Navbar } from "./components/Navbar";
@@ -13,6 +13,11 @@ import { News } from "./components/News";
 import { Partners } from "./components/Partners";
 import { CTA } from "./components/CTA";
 import { Footer } from "./components/Footer";
+// import LiquidCursor from "./components/liquid-cursor";
+const LiquidCursor = dynamic(
+  () => import("./components/liquid-cursor"),
+  { ssr: false } // <- prevents server-side rendering
+);
 
 const AppContent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,8 +72,10 @@ const AppContent = () => {
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
       />
-
-      <Hero darkMode={darkMode} />
+      <>
+        <LiquidCursor />
+        <Hero darkMode={darkMode} />
+      </>
 
       <Stats darkMode={darkMode} />
 

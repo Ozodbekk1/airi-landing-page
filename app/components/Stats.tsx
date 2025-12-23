@@ -79,7 +79,7 @@ export const Stats: React.FC<StatsProps> = ({ darkMode }) => {
           return (
             <div
               key={index}
-              className='relative group'
+              className='relative group z-10'
               style={{ animationDelay: `${index * 100}ms` }}>
               <div
                 className={`absolute inset-0 ${
@@ -88,8 +88,8 @@ export const Stats: React.FC<StatsProps> = ({ darkMode }) => {
                     : "bg-gradient-to-br from-blue-200/50 to-purple-200/50"
                 } rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300`}></div>
               <div
-                className={`relative ${cardBgClass} backdrop-blur-sm border rounded-2xl p-6 ${hoverBorderClass} transition-all duration-300`}>
-                <Icon className='w-8 h-8 text-blue-500 mb-4' />
+                className={`relative ${cardBgClass} backdrop-blur-sm z-10 border rounded-2xl p-6 ${hoverBorderClass} transition-all duration-300`}>
+                <Icon className='w-8 h-8 text-blue-500 mb-4 z-10' />
                 <h3
                   className={`text-3xl ${
                     darkMode ? "text-white" : "text-gray-900"
@@ -110,7 +110,7 @@ export const Stats: React.FC<StatsProps> = ({ darkMode }) => {
           return (
             <div
               key={index}
-              className={`${cardBgClass} backdrop-blur-sm border rounded-xl p-6 ${hoverBorderClass} transition-all duration-300 text-center`}>
+              className={`${cardBgClass} backdrop-blur-sm z-10 border rounded-xl p-6 ${hoverBorderClass} transition-all duration-300 text-center`}>
               <Icon className='w-8 h-8 text-blue-500 mx-auto mb-3' />
               <h4
                 className={`${darkMode ? "text-white" : "text-gray-900"} mb-1`}>
